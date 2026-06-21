@@ -29,14 +29,11 @@ export function calculateImpactDiff(oldScore: ScoreResult, newScore: ScoreResult
     if (catDiff < 0) worsened.push(cat);
   });
   
-  let summary = '';
-  if (isImprovement) {
-    summary = `Awesome! You reduced your footprint by ${diff} kg CO2e. Keep it up!`;
-  } else if (diff < 0) {
-    summary = `Your footprint increased by ${Math.abs(diff)} kg CO2e. Check your recommendations to get back on track.`;
-  } else {
-    summary = `Your footprint is exactly the same.`;
-  }
+  const summary = isImprovement 
+    ? `Awesome! You reduced your footprint by ${diff} kg CO2e. Keep it up!`
+    : diff < 0 
+      ? `Your footprint increased by ${Math.abs(diff)} kg CO2e. Check your recommendations to get back on track.`
+      : `Your footprint is exactly the same.`;
   
   return {
     improvementAmount: Math.abs(diff),

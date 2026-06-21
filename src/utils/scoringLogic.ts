@@ -49,7 +49,7 @@ export function calculateScore(data: AssessmentData): ScoreResult {
   else if (data.waste === 'low') waste = 20;
   else if (data.waste === 'zero-waste') waste = 5;
 
-  let flights = (data.flights || 0) * 250; // approx 250kg per short flight
+  const flights = (data.flights || 0) * 250; // approx 250kg per short flight
 
   const breakdown: CategoryBreakdown = {
     transport,

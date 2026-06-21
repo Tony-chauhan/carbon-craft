@@ -86,7 +86,7 @@ export function AssessmentFlow() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Primary mode of transport</label>
-                    <select {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <select aria-label="Primary mode of transport" {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
                       <option value="car">Car (Gas/Diesel)</option>
                       <option value="mixed">Mixed (Car + Public)</option>
                       <option value="public">Public Transit</option>
@@ -96,7 +96,7 @@ export function AssessmentFlow() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Estimated Car Usage (miles/week)</label>
-                    <input type="number" {...register('carUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
+                    <input aria-label="Estimated Car Usage" type="number" {...register('carUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
                   </div>
                 </div>
               )}
@@ -105,7 +105,7 @@ export function AssessmentFlow() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Energy Source</label>
-                    <select {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <select aria-label="Energy Source" {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
                       <option value="fossil">Mostly Fossil Fuels</option>
                       <option value="mixed">Mixed</option>
                       <option value="renewable">100% Renewable</option>
@@ -113,7 +113,7 @@ export function AssessmentFlow() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Monthly Electricity (kWh)</label>
-                    <input type="number" {...register('energyUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
+                    <input aria-label="Monthly Electricity" type="number" {...register('energyUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
                   </div>
                 </div>
               )}
@@ -122,7 +122,7 @@ export function AssessmentFlow() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Diet Type</label>
-                    <select {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <select aria-label="Diet Type" {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
                       <option value="meat-heavy">Meat Heavy (Every meal)</option>
                       <option value="balanced">Balanced (Some meat)</option>
                       <option value="vegetarian">Vegetarian</option>
@@ -136,7 +136,7 @@ export function AssessmentFlow() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Shopping Habits</label>
-                    <select {...register('shopping')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <select aria-label="Shopping Habits" {...register('shopping')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
                       <option value="frequent">Frequent (Fast Fashion)</option>
                       <option value="average">Average</option>
                       <option value="rare">Rare / Essential only</option>
@@ -145,7 +145,7 @@ export function AssessmentFlow() {
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Waste Management</label>
-                    <select {...register('waste')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <select aria-label="Waste Management" {...register('waste')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
                       <option value="high">High (Rarely recycle)</option>
                       <option value="average">Average (Recycle basics)</option>
                       <option value="low">Low (Compost + Recycle)</option>
@@ -159,7 +159,7 @@ export function AssessmentFlow() {
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-text-secondary mb-2">Flights per year</label>
-                    <input type="number" {...register('flights', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
+                    <input aria-label="Flights per year" type="number" {...register('flights', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
                   </div>
                 </div>
               )}
