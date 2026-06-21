@@ -29,7 +29,7 @@ export function calculateImpactDiff(oldScore: ScoreResult, newScore: ScoreResult
     if (catDiff < 0) worsened.push(cat);
   });
   
-  let summary = '';
+  let summary: string;
   if (isImprovement) {
     summary = `Awesome! You reduced your footprint by ${diff} kg CO2e. Keep it up!`;
   } else if (diff < 0) {
