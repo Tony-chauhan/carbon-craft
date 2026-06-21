@@ -3,6 +3,8 @@
 
 > A premium 3D climate intelligence experience that helps individuals **understand, track, and reduce their carbon footprint** through **simple actions** and **personalized insights**.
 
+**🚀 Live Demo:** [https://carbon-craft.vercel.app/](https://carbon-craft.vercel.app/)
+
 <p align="center">
   <img src="https://img.shields.io/badge/3D-Interactive-22d3ee?style=for-the-badge" alt="3D" />
   <img src="https://img.shields.io/badge/React-18+-61dafb?style=for-the-badge&logo=react" alt="React" />
