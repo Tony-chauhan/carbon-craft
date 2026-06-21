@@ -1,3 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps, react-hooks/incompatible-library */
+/**
+ * @file SimulationPanel.tsx
+ * @description What-If Simulator Panel allowing users to tweak their parameters
+ * and see the visual 3D and scoring updates in real time.
+ */
+
 import { useEffect } from 'react';
 import { useCarbonStore } from '../store/useCarbonStore';
 import { useForm } from 'react-hook-form';
@@ -5,6 +12,9 @@ import type { AssessmentData } from '../utils/validationSchema';
 import { motion } from 'framer-motion';
 import { Sliders, RefreshCw } from 'lucide-react';
 
+/**
+ * SimulationPanel component containing sliders and selects to test alternative habits.
+ */
 export function SimulationPanel() {
   const { assessmentData, simulationScore, updateSimulation, toggleSimulationMode } = useCarbonStore();
 
@@ -54,11 +64,11 @@ export function SimulationPanel() {
       <form className="space-y-4">
         
         <div className="glass-panel p-5 rounded-2xl space-y-3">
-          <label className="text-sm font-semibold text-text-primary flex justify-between">
+          <label htmlFor="sim-transport-select" className="text-sm font-semibold text-text-primary flex justify-between">
             Transport Mode
             <span className="text-accent-primary">{currentValues.transport}</span>
           </label>
-          <select {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
+          <select id="sim-transport-select" {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
             <option value="car">Car</option>
             <option value="mixed">Mixed</option>
             <option value="public">Public Transit</option>
@@ -68,11 +78,11 @@ export function SimulationPanel() {
         </div>
 
         <div className="glass-panel p-5 rounded-2xl space-y-3">
-          <label className="text-sm font-semibold text-text-primary flex justify-between">
+          <label htmlFor="sim-homeEnergy-select" className="text-sm font-semibold text-text-primary flex justify-between">
             Home Energy Plan
             <span className="text-accent-primary">{currentValues.homeEnergy}</span>
           </label>
-          <select {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
+          <select id="sim-homeEnergy-select" {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
             <option value="fossil">Fossil Fuels</option>
             <option value="mixed">Mixed</option>
             <option value="renewable">100% Renewable</option>
@@ -80,11 +90,11 @@ export function SimulationPanel() {
         </div>
 
         <div className="glass-panel p-5 rounded-2xl space-y-3">
-          <label className="text-sm font-semibold text-text-primary flex justify-between">
+          <label htmlFor="sim-diet-select" className="text-sm font-semibold text-text-primary flex justify-between">
             Diet Style
             <span className="text-accent-primary">{currentValues.diet}</span>
           </label>
-          <select {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
+          <select id="sim-diet-select" {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
             <option value="meat-heavy">Meat Heavy</option>
             <option value="balanced">Balanced</option>
             <option value="vegetarian">Vegetarian</option>
@@ -93,11 +103,11 @@ export function SimulationPanel() {
         </div>
         
         <div className="glass-panel p-5 rounded-2xl space-y-3">
-          <label className="text-sm font-semibold text-text-primary flex justify-between">
+          <label htmlFor="sim-flights-input" className="text-sm font-semibold text-text-primary flex justify-between">
             Annual Flights
             <span className="text-accent-primary">{currentValues.flights}</span>
           </label>
-          <input type="range" min="0" max="20" {...register('flights', { valueAsNumber: true })} className="w-full accent-accent-primary" />
+          <input id="sim-flights-input" type="range" min="0" max="20" {...register('flights', { valueAsNumber: true })} className="w-full accent-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none" />
         </div>
 
       </form>

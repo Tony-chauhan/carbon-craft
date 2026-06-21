@@ -1,3 +1,10 @@
+/**
+ * @file AssessmentFlow.tsx
+ * @description Guided multi-step onboarding assessment wizard.
+ * Collects transportation, energy, diet, shopping, and flight details, validates input via Zod,
+ * and initializes the main carbon store footprint scores.
+ */
+
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,6 +21,9 @@ const steps = [
   { id: 'travel', title: 'Air Travel', icon: <Plane /> },
 ];
 
+/**
+ * AssessmentFlow component containing the guided 5-step carbon footprint wizard.
+ */
 export function AssessmentFlow() {
   const { submitAssessment } = useCarbonStore();
   const [currentStep, setCurrentStep] = useState(0);
@@ -30,7 +40,6 @@ export function AssessmentFlow() {
   });
 
   const nextStep = async () => {
-    // We could trigger specific field validation here
     if (currentStep < steps.length - 1) {
       setCurrentStep(prev => prev + 1);
     }
@@ -85,8 +94,8 @@ export function AssessmentFlow() {
               {currentStep === 0 && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Primary mode of transport</label>
-                    <select {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <label htmlFor="transport-select" className="block text-sm font-medium text-text-secondary mb-2">Primary mode of transport</label>
+                    <select id="transport-select" {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
                       <option value="car">Car (Gas/Diesel)</option>
                       <option value="mixed">Mixed (Car + Public)</option>
                       <option value="public">Public Transit</option>
@@ -95,8 +104,8 @@ export function AssessmentFlow() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Estimated Car Usage (miles/week)</label>
-                    <input type="number" {...register('carUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
+                    <label htmlFor="carUsage-input" className="block text-sm font-medium text-text-secondary mb-2">Estimated Car Usage (miles/week)</label>
+                    <input id="carUsage-input" type="number" {...register('carUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all" />
                   </div>
                 </div>
               )}
@@ -104,16 +113,16 @@ export function AssessmentFlow() {
               {currentStep === 1 && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Energy Source</label>
-                    <select {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <label htmlFor="homeEnergy-select" className="block text-sm font-medium text-text-secondary mb-2">Energy Source</label>
+                    <select id="homeEnergy-select" {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
                       <option value="fossil">Mostly Fossil Fuels</option>
                       <option value="mixed">Mixed</option>
                       <option value="renewable">100% Renewable</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Monthly Electricity (kWh)</label>
-                    <input type="number" {...register('energyUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
+                    <label htmlFor="energyUsage-input" className="block text-sm font-medium text-text-secondary mb-2">Monthly Electricity (kWh)</label>
+                    <input id="energyUsage-input" type="number" {...register('energyUsage', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all" />
                   </div>
                 </div>
               )}
@@ -121,8 +130,8 @@ export function AssessmentFlow() {
               {currentStep === 2 && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Diet Type</label>
-                    <select {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <label htmlFor="diet-select" className="block text-sm font-medium text-text-secondary mb-2">Diet Type</label>
+                    <select id="diet-select" {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
                       <option value="meat-heavy">Meat Heavy (Every meal)</option>
                       <option value="balanced">Balanced (Some meat)</option>
                       <option value="vegetarian">Vegetarian</option>
@@ -135,8 +144,8 @@ export function AssessmentFlow() {
               {currentStep === 3 && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Shopping Habits</label>
-                    <select {...register('shopping')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <label htmlFor="shopping-select" className="block text-sm font-medium text-text-secondary mb-2">Shopping Habits</label>
+                    <select id="shopping-select" {...register('shopping')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
                       <option value="frequent">Frequent (Fast Fashion)</option>
                       <option value="average">Average</option>
                       <option value="rare">Rare / Essential only</option>
@@ -144,8 +153,8 @@ export function AssessmentFlow() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Waste Management</label>
-                    <select {...register('waste')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all">
+                    <label htmlFor="waste-select" className="block text-sm font-medium text-text-secondary mb-2">Waste Management</label>
+                    <select id="waste-select" {...register('waste')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all">
                       <option value="high">High (Rarely recycle)</option>
                       <option value="average">Average (Recycle basics)</option>
                       <option value="low">Low (Compost + Recycle)</option>
@@ -158,8 +167,8 @@ export function AssessmentFlow() {
               {currentStep === 4 && (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-text-secondary mb-2">Flights per year</label>
-                    <input type="number" {...register('flights', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary outline-none transition-all" />
+                    <label htmlFor="flights-input" className="block text-sm font-medium text-text-secondary mb-2">Flights per year</label>
+                    <input id="flights-input" type="number" {...register('flights', { valueAsNumber: true })} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-3 text-text-primary focus:border-accent-primary focus:ring-2 focus:ring-accent-primary focus:outline-none transition-all" />
                   </div>
                 </div>
               )}
