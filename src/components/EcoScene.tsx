@@ -1,4 +1,4 @@
-import { useRef, useMemo, useState } from 'react';
+import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, Sparkles, Cloud } from '@react-three/drei';
 import { EffectComposer, Bloom } from '@react-three/postprocessing';
@@ -7,14 +7,14 @@ import { useCarbonStore } from '../store/useCarbonStore';
 
 function Island({ scoreLevel }: { scoreLevel: 'low' | 'medium' | 'high' }) {
   const groupRef = useRef<THREE.Group>(null);
-  const [materials] = useState(() => ({
+  const materialsRef = useRef<{ base: THREE.MeshStandardMaterial, leaves: THREE.MeshStandardMaterial }>({
     base: new THREE.MeshStandardMaterial({ color: '#10b981', roughness: 0.8 }),
     leaves: new THREE.MeshStandardMaterial({ color: '#059669', roughness: 0.9 })
-  }));
+  });
 
   const targetColors = useMemo(() => {
     return { base: new THREE.Color('#000000'), leaves: new THREE.Color('#000000') };
-  }, []);
+  }, [scoreLevel]);
 
   useFrame((state, delta) => {
     if (groupRef.current) {
@@ -22,22 +22,22 @@ function Island({ scoreLevel }: { scoreLevel: 'low' | 'medium' | 'high' }) {
       groupRef.current.rotation.y += 0.002;
     }
     // Smoothly interpolate colors
-    materials.base.color.lerp(targetColors.base, delta * 2);
-    materials.leaves.color.lerp(targetColors.leaves, delta * 2);
+    materialsRef.current.base.color.lerp(targetColors.base, delta * 2);
+    materialsRef.current.leaves.color.lerp(targetColors.leaves, delta * 2);
   });
 
   return (
     <group ref={groupRef}>
       {/* Island Base */}
-      <mesh receiveShadow position={[0, -1, 0]} material={materials.base}>
+      <mesh receiveShadow position={[0, -1, 0]} material={materialsRef.current.base}>
         <cylinderGeometry args={[3.5, 2.5, 2, 8]} />
       </mesh>
       
       {/* Trees / Structures */}
-      <mesh castShadow position={[-1, 0.5, -1]} material={materials.leaves}>
+      <mesh castShadow position={[-1, 0.5, -1]} material={materialsRef.current.leaves}>
         <coneGeometry args={[0.5, 2, 5]} />
       </mesh>
-      <mesh castShadow position={[1.5, 0.2, -0.5]} material={materials.leaves}>
+      <mesh castShadow position={[1.5, 0.2, -0.5]} material={materialsRef.current.leaves}>
         <coneGeometry args={[0.6, 1.8, 6]} />
       </mesh>
       
@@ -84,10 +84,10 @@ function WindmillBlades({ speed }: { speed: number }) {
   );
 }
 
-function SceneLighting() {
+function SceneLighting({ scoreLevel }: { scoreLevel: string }) {
   const targetBg = useMemo(() => {
     return new THREE.Color('#1c1c1e'); // Dark grayish
-  }, []);
+  }, [scoreLevel]);
 
   useFrame((state, delta) => {
     (state.scene.background as THREE.Color)?.lerp(targetBg, delta * 1.5);
@@ -127,7 +127,7 @@ export function EcoScene() {
   return (
     <div className="w-full h-full">
       <Canvas shadows camera={{ position: [6, 5, 10], fov: 40 }} gl={{ antialias: false }}>
-        <SceneLighting />
+        <SceneLighting scoreLevel={scoreLevel} />
         
         <Island scoreLevel={scoreLevel} />
         

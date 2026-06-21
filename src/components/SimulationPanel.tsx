@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps, react-hooks/incompatible-library */
 import { useEffect } from 'react';
 import { useCarbonStore } from '../store/useCarbonStore';
 import { useForm } from 'react-hook-form';
@@ -59,7 +58,7 @@ export function SimulationPanel() {
             Transport Mode
             <span className="text-accent-primary">{currentValues.transport}</span>
           </label>
-          <select aria-label="Transport Mode" {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
+          <select {...register('transport')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
             <option value="car">Car</option>
             <option value="mixed">Mixed</option>
             <option value="public">Public Transit</option>
@@ -73,7 +72,7 @@ export function SimulationPanel() {
             Home Energy Plan
             <span className="text-accent-primary">{currentValues.homeEnergy}</span>
           </label>
-          <select aria-label="Home Energy Plan" {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
+          <select {...register('homeEnergy')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
             <option value="fossil">Fossil Fuels</option>
             <option value="mixed">Mixed</option>
             <option value="renewable">100% Renewable</option>
@@ -85,7 +84,7 @@ export function SimulationPanel() {
             Diet Style
             <span className="text-accent-primary">{currentValues.diet}</span>
           </label>
-          <select aria-label="Diet Style" {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
+          <select {...register('diet')} className="w-full bg-bg-base border border-white/10 rounded-xl px-4 py-2 text-text-primary focus:border-accent-primary outline-none">
             <option value="meat-heavy">Meat Heavy</option>
             <option value="balanced">Balanced</option>
             <option value="vegetarian">Vegetarian</option>
@@ -98,7 +97,7 @@ export function SimulationPanel() {
             Annual Flights
             <span className="text-accent-primary">{currentValues.flights}</span>
           </label>
-          <input aria-label="Annual Flights" type="range" min="0" max="20" {...register('flights', { valueAsNumber: true })} className="w-full accent-accent-primary" />
+          <input type="range" min="0" max="20" {...register('flights', { valueAsNumber: true })} className="w-full accent-accent-primary" />
         </div>
 
       </form>
