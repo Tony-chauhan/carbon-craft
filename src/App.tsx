@@ -1,15 +1,24 @@
+/**
+ * @file App.tsx
+ * @description Main entry point of the CarbonCraft 3D application.
+ * Manages onboarding overlays, lazy loading of subcomponents, and sidebar transitions.
+ */
+
 import React, { Suspense } from 'react';
 import { useCarbonStore } from './store/useCarbonStore';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Activity, Gamepad2, Settings2, Loader2 } from 'lucide-react';
 
-// Code Splitting for Performance
+// Code Splitting for Performance Optimization
 const AssessmentFlow = React.lazy(() => import('./components/AssessmentFlow').then(m => ({ default: m.AssessmentFlow })));
 const Dashboard = React.lazy(() => import('./components/Dashboard').then(m => ({ default: m.Dashboard })));
 const EcoScene = React.lazy(() => import('./components/EcoScene').then(m => ({ default: m.EcoScene })));
 const SimulationPanel = React.lazy(() => import('./components/SimulationPanel').then(m => ({ default: m.SimulationPanel })));
 const Gamification = React.lazy(() => import('./components/Gamification').then(m => ({ default: m.Gamification })));
 
+/**
+ * Fallback loader displayed while lazy components compile or fetch resources.
+ */
 function LoadingFallback() {
   return (
     <div className="flex flex-col items-center justify-center w-full h-full text-accent-primary p-12">
@@ -19,6 +28,9 @@ function LoadingFallback() {
   );
 }
 
+/**
+ * Main App component orchestrating 3D visualization and dashboard navigation panels.
+ */
 function App() {
   const { hasCompletedOnboarding, activePanel, setActivePanel } = useCarbonStore();
 
@@ -93,6 +105,9 @@ function App() {
   );
 }
 
+/**
+ * Renders a tab navigation button styled with glassmorphic borders and hover glow states.
+ */
 function NavButton({ icon, label, isActive, onClick }: { icon: React.ReactNode, label: string, isActive: boolean, onClick: () => void }) {
   return (
     <button 

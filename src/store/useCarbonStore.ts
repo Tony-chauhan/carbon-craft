@@ -1,3 +1,9 @@
+/**
+ * @file useCarbonStore.ts
+ * @description Main state management store using Zustand with LocalStorage persistence.
+ * Houses state for assessment results, simulator overrides, historical footprints, and gamification ranks/badges.
+ */
+
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import type { AssessmentData } from '../utils/validationSchema';
@@ -6,6 +12,9 @@ import { generateRecommendations, type Recommendation } from '../utils/recommend
 import { generateInsight } from '../utils/insightEngine';
 import { calculateImpactDiff, type ImpactDiff } from '../utils/impactDiff';
 
+/**
+ * Achievement badge representation unlocked by users.
+ */
 export type Achievement = {
   id: string;
   title: string;
@@ -13,46 +22,130 @@ export type Achievement = {
   unlockedAt: string;
 };
 
+/**
+ * State slices representing CarbonCraft 3D metrics.
+ */
 type State = {
-  // userInputSlice
+  /**
+   * Verified onboarding assessment input.
+   */
   assessmentData: AssessmentData | null;
   
-  // scoreSlice
+  /**
+   * Current calculated footprint score and breakdowns.
+   */
   score: ScoreResult | null;
+  
+  /**
+   * Actionable reduction recommendations.
+   */
   recommendations: Recommendation[];
+  
+  /**
+   * Dynamic NLP analysis summary.
+   */
   insight: string | null;
   
-  // progressSlice
+  /**
+   * Historical record of submissions.
+   */
   history: { date: string; score: ScoreResult }[];
+  
+  /**
+   * Quantitative comparison diff against prior score.
+   */
   impactDiff: ImpactDiff | null;
 
-  // gamificationSlice
+  /**
+   * Experience points earned through streak actions.
+   */
   xp: number;
+  
+  /**
+   * Current tier level (Beginner, Aware, Reducer, Guardian, Planet Hero).
+   */
   ecoLevel: string;
+  
+  /**
+   * Streak count of consecutive daily action completions.
+   */
   streak: number;
+  
+  /**
+   * Timestamp of last action log for streak enforcement.
+   */
   lastActionDate: string | null;
+  
+  /**
+   * Unlocked badge list.
+   */
   achievements: Achievement[];
 
-  // simulationSlice
+  /**
+   * Toggle status of What-If simulation engine.
+   */
   isSimulationMode: boolean;
+  
+  /**
+   * Parameters set during what-if simulations.
+   */
   simulationData: AssessmentData | null;
+  
+  /**
+   * Recomputed score during what-if simulations.
+   */
   simulationScore: ScoreResult | null;
 
-  // uiSlice
+  /**
+   * Onboarding completion flag.
+   */
   hasCompletedOnboarding: boolean;
+  
+  /**
+   * Active sidebar interface panel name.
+   */
   activePanel: 'dashboard' | 'insights' | 'simulation' | 'gamification';
 };
 
+/**
+ * Store action state dispatch dispatchers.
+ */
 type Actions = {
+  /**
+   * Evaluates input, logs history, checks diffs, awards XP, and triggers state updates.
+   */
   submitAssessment: (data: AssessmentData) => void;
+  
+  /**
+   * Calculates simulated scores instantly when What-If values change.
+   */
   updateSimulation: (data: AssessmentData) => void;
+  
+  /**
+   * Switches store output between live actual score and mock simulator score.
+   */
   toggleSimulationMode: (active: boolean) => void;
+  
+  /**
+   * Changes navigation tab focus.
+   */
   setActivePanel: (panel: State['activePanel']) => void;
+  
+  /**
+   * Awards XP, checks level changes, and increments streaks if logged on distinct days.
+   */
   logAction: (actionXp: number) => void;
+  
+  /**
+   * Purges all LocalStorage state and returns store to initialization parameters.
+   */
   resetData: () => void;
 };
 
-const getEcoLevel = (xp: number) => {
+/**
+ * Calculates user rank tier based on XP accumulation thresholds.
+ */
+const getEcoLevel = (xp: number): string => {
   if (xp >= 1000) return 'Planet Hero';
   if (xp >= 500) return 'Guardian';
   if (xp >= 200) return 'Reducer';

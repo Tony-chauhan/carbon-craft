@@ -1,8 +1,17 @@
+/**
+ * @file Dashboard.tsx
+ * @description Main dashboard view showing the calculated carbon footprint score,
+ * AI insights, progress streaks, and personalized action recommendations.
+ */
+
 import { motion } from 'framer-motion';
 import { useCarbonStore } from '../store/useCarbonStore';
 import { ArrowDownRight, ArrowUpRight, Target, Leaf } from 'lucide-react';
 import type { Recommendation } from '../utils/recommendationsLogic';
 
+/**
+ * Dashboard component displaying real-time footprint scores and recommended actions.
+ */
 export function Dashboard() {
   const { score, insight, recommendations, impactDiff, streak } = useCarbonStore();
 
@@ -23,7 +32,8 @@ export function Dashboard() {
         
         <div className="flex justify-between items-start mb-6 relative z-10">
           <div>
-            <h2 className="text-sm font-semibold tracking-widest text-text-secondary uppercase">Your Footprint</h2>
+            <h2 className="text-sm font-semibold tracking-widest text-text-secondary uppercase">Your Carbon Footprint</h2>
+            <p className="text-xs text-text-secondary mt-1 max-w-[280px]">Understand, track, and reduce your carbon footprint through simple actions and personalized insights.</p>
             <div className="flex items-baseline gap-2 mt-2" aria-live="polite" aria-atomic="true">
               <motion.span 
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -89,6 +99,9 @@ export function Dashboard() {
   );
 }
 
+/**
+ * Card component for listing recommended footprint reduction actions.
+ */
 function RecommendationCard({ rec, index }: { rec: Recommendation, index: number }) {
   const isHighImpact = rec.impact === 'high';
   

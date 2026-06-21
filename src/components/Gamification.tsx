@@ -1,7 +1,16 @@
+/**
+ * @file Gamification.tsx
+ * @description Journey progress and achievement badges.
+ * Displays user's eco rank level, XP metrics, progress bar, and unlocked trophies.
+ */
+
 import { motion } from 'framer-motion';
 import { useCarbonStore } from '../store/useCarbonStore';
 import { Trophy, Award } from 'lucide-react';
 
+/**
+ * Gamification component displaying XP and badges.
+ */
 export function Gamification() {
   const { xp, ecoLevel, achievements } = useCarbonStore();
 
