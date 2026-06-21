@@ -36,7 +36,7 @@ if (typeof window !== 'undefined') {
 
 import { describe, it, expect, beforeEach, beforeAll } from 'vitest';
 
-let useCarbonStore: any;
+let useCarbonStore: typeof import('../store/useCarbonStore').useCarbonStore;
 
 beforeAll(async () => {
   const module = await import('../store/useCarbonStore');

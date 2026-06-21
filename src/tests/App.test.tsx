@@ -35,6 +35,7 @@ Object.defineProperty(window, 'localStorage', {
 
 import { describe, it, expect, vi, beforeAll, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import type { ComponentType } from 'react';
 
 // Mock all lazy-loaded subcomponents of App
 vi.mock('../components/EcoScene', () => ({
@@ -53,8 +54,8 @@ vi.mock('../components/Gamification', () => ({
   Gamification: () => <div data-testid="mock-gamification">Journey Panel</div>
 }));
 
-let App: any;
-let useCarbonStore: any;
+let App: ComponentType;
+let useCarbonStore: typeof import('../store/useCarbonStore').useCarbonStore;
 
 beforeAll(async () => {
   const appModule = await import('../App');
